@@ -17,25 +17,43 @@ package org.brunocvcunha.opennode.api;
 
 import java.util.List;
 
-import org.brunocvcunha.opennode.api.model.OpenNodeCharge;
-import org.brunocvcunha.opennode.api.model.OpenNodeCreateCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeResponse;
+import org.brunocvcunha.opennode.api.model.payments.Charge;
+import org.brunocvcunha.opennode.api.model.payments.ChargeDecode;
+import org.brunocvcunha.opennode.api.model.payments.CreateCharge;
+import org.brunocvcunha.opennode.api.model.transfers.CreateWithdrawal;
+import org.brunocvcunha.opennode.api.model.transfers.Withdrawal;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface OpenNodeService {
 
-    @GET("charges")
-    Call<OpenNodeResponse<List<OpenNodeCharge>>> listCharges();
-    
+        
+    // payments
     @POST("charges")
-    Call<OpenNodeResponse<OpenNodeCharge>> createCharge(@Body OpenNodeCreateCharge charge);
+    Call<OpenNodeResponse<Charge>> createCharge(@Body CreateCharge charge);
+
+    @GET("charges")
+    Call<OpenNodeResponse<List<Charge>>> listCharges();
     
     @GET("charge/{id}")
-    Call<OpenNodeResponse<OpenNodeCharge>> getCharge(@Path("id") String id);
+    Call<OpenNodeResponse<Charge>> getCharge(@Path("id") String id);
+
+    @POST("charge/decode")
+    Call<OpenNodeResponse<ChargeDecode>> decodeCharge(@Body String bolt11String);
+
+    // withdrawals
+    @POST("withdrawals")
+    Call<OpenNodeResponse<Withdrawal>> createWithdrawal(@Body CreateWithdrawal withdrawal);
+
+    @GET("withdrawals")
+    Call<OpenNodeResponse<List<Withdrawal>>> listWithdrawal();
+
+    @GET("withdrawal/{id}")
+    Call <OpenNodeResponse<Withdrawal>> getWithdrawal(@Path("id") String id);
+
 }

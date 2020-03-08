@@ -32,17 +32,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class OpenNodeServiceFactory {
 
     private static final String BASE_URL_V1 = "https://api.opennode.co/v1/";
+    private static final String DEV_URL_V1 = "https://dev-api.opennode.co/v1/";
 
-    public static OpenNodeService buildClient(String accessToken) {
+    public static OpenNodeService buildClient(String accessToken, String enviroment) {
         OkHttpClient httpClient = createClientInterceptor(accessToken);
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL_V1)
-                .addConverterFactory(GsonConverterFactory.create()).client(httpClient).build();
+        Retrofit retrofit;
+        if (enviroment.contains("prod")) {
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL_V1).addConverterFactory(GsonConverterFactory.create())
+                    .client(httpClient).build();
+        } else {
+            retrofit = new Retrofit.Builder().baseUrl(DEV_URL_V1).addConverterFactory(GsonConverterFactory.create())
+                    .client(httpClient).build();
+        }
 
         OpenNodeService service = retrofit.create(OpenNodeService.class);
         return service;
     }
 
-    public static OkHttpClient createClientInterceptor(String accessToken) {
+    private static OkHttpClient createClientInterceptor(String accessToken) {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
         okHttpClientBuilder.addInterceptor(new Interceptor() {
             @Override

@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.brunocvcunha.opennode.api.model;
+package org.brunocvcunha.opennode.api.model.payments;
 
-import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 /**
- * Response Bag for OpenNode
- * 
+ * Lightning Invoice Data
  * @author brunovolpato
  *
  */
 @Data
-public class OpenNodeResponse<T> {
-    T data;
-
-    @Override
-    public String toString() {
-        return new Gson().toJson(data);
-    }
-
+public class LightningInvoice {
+    @SerializedName("settled_at")
+    private long settledAt;
+    
+    private String payreq;
 }
+

@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.brunocvcunha.opennode.api.model;
+package org.brunocvcunha.opennode.api.model.payments;
 
-import com.google.gson.Gson;
-
-import lombok.Data;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Response Bag for OpenNode
- * 
+ * Status of a charge
  * @author brunovolpato
  *
  */
-@Data
-public class OpenNodeResponse<T> {
-    T data;
+public enum ChargeStatus {
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(data);
-    }
-
+    @SerializedName("paid")
+    PAID,
+    
+    @SerializedName("unpaid")
+    UNPAID,
+    
+    @SerializedName("processing")
+    PROCESSING;
 }

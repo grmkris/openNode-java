@@ -1,3 +1,6 @@
+This is my clone of: https://github.com/brunocvcunha/opennode-java  
+I am extending that library and using this repository for easier independant work. 
+
 opennode-java
 ========
 

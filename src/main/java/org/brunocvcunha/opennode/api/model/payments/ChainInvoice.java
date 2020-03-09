@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2017 Bruno Candido Volpato da Cunha (kristjan.grm1@gmail.com)
+ * Copyright (C) 2017 Bruno Candido Volpato da Cunha (brunocvcunha@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,10 @@ package org.brunocvcunha.opennode.api.model.payments;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
-import lombok.Getter;
 
 /**
- * Charge Data
- * @author grmkris
+ * Chain Invoice Data
+ * @author brunovolpato
  *
  */
 @Data
